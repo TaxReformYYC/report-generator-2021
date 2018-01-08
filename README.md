@@ -4,22 +4,19 @@ Process property assessment reports provided by the City of Calgary and automati
 
 I currently have three victories before Calgary's [Assessment Review Board](http://www.calgaryarb.ca/eCourtPublic/). Go to [TaxReformYYC](https://taxreformyyc.com) for more information.
 
-## In progress...
+# In progress...
 
 In open-sourcing this software, I've had to make improvements to tests and documentation. Keep checking back for updates.
 
-## Dependencies
+# Dependencies
 
-This software was developed on Ubuntu 16.04. The following dependencies
-
-### Third party
+This software was developed on Ubuntu 16.04. It requires the following packages to generate the reports:
 
 1. `gs`
 2. `tesseract`
 3. `enscript`
 4. `pandoc`
 5. `R`
-
     
 The following commands will install all third party dependencies:
 
@@ -27,23 +24,14 @@ The following commands will install all third party dependencies:
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository 'deb [arch=amd64,i386] https://cran.rstudio.com/bin/linux/ubuntu xenial/'
 sudo apt update
-sudo apt install -y ghostscript tesseract-ocr enscript pandoc r-base r-base-dev r-cran-ggplot2 libmagick++-dev #xorg libx11-dev libglu1-mesa-dev r-cran-rcpp gdebi-core
+sudo apt install -y ghostscript tesseract-ocr enscript pandoc r-base r-base-dev r-cran-ggplot2 r-cran-scales libmagick++-dev mesa-common-dev libglu1-mesa-dev
 ``` 
 
-### R
+## R
 
-Knitr:
+`R` has some dependencies that are not available in Ubuntu 16.04 (Xenial) PPAs. They need to be installed into the `R` environment directly.
 
-```
-wget https://launchpad.net/ubuntu/+archive/primary/+files/r-cran-knitr_1.15.1-2build1_amd64.deb
-sudo dpkg -i r-cran-knitr_1.15.1-2build1_amd64.deb
-sudo apt install -f
-```
-
-
-R has a bunch of its own packages, which are needed to generate the graphs and reports.
-
-At the `R` command prompt:
+Execute the following to open the `R` command prompt:
 
 ```
 R
@@ -54,12 +42,11 @@ Execute the following `R` commands:
 ```
 install.packages('knitr', dependencies = TRUE)
 install.packages('scales', dependencies = TRUE)
-install.packages('formattable', dependencies = TRUE)
-#install.packages('ggplot2', dependencies = TRUE)
 ```
 
+Assuming successful installation, you can exit `R` by holding `Ctrl-D`.
 
-## Installation
+# Installation (coming soon)
 
 Add this line to your application's Gemfile:
 
