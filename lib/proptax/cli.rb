@@ -59,32 +59,32 @@ module Proptax
 #      generate_material("promos")
 #      generate_material("reports")
 #    end
-#
-#    desc "filter CSV_FILE", "Calculate and display assessment discrepancies"
-#    method_option :csv,
-#                    :type => :boolean,
-#                    :default => false,
-#                    :description => "Output in CSV format"
-#    method_option :header,
-#                    :type => :boolean,
-#                    :default => true,
-#                    :description => "Include header row in CSV format"
-#    def filter(csv)
-#      data_frame = `Rscript "#{__dir__}"/../R/filter_csv.R "#{csv}"`
-#      if options[:csv]
-#        lines = data_frame.split("\n")
-#        # Print header
-#        puts lines[0].squeeze(' ').split(' ').to_csv if options[:header]
-#
-#        # Print data (minus R-inserted integer row name) 
-#        lines[1..-1].each do |line|
-#          puts line.squeeze(' ').split(' ')[1..-1].to_csv
-#        end
-#      else
-#        puts data_frame
-#      end
-#    end
-#
+
+    desc "filter CSV_FILE", "Calculate and display assessment discrepancies"
+    method_option :csv,
+                    :type => :boolean,
+                    :default => false,
+                    :description => "Output in CSV format"
+    method_option :header,
+                    :type => :boolean,
+                    :default => true,
+                    :description => "Include header row in CSV format"
+    def filter(csv)
+      data_frame = `Rscript "#{__dir__}"/../R/filter_csv.R "#{csv}"`
+      if options[:csv]
+        lines = data_frame.split("\n")
+        # Print header
+        puts lines[0].squeeze(' ').split(' ').to_csv if options[:header]
+
+        # Print data (minus R-inserted integer row name) 
+        lines[1..-1].each do |line|
+          puts line.squeeze(' ').split(' ')[1..-1].to_csv
+        end
+      else
+        puts data_frame
+      end
+    end
+
 #    no_commands do
 #      def generate_material(dir)
 #        Dir.foreach(dir) do |file|
