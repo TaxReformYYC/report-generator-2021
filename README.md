@@ -29,7 +29,7 @@ sudo apt install -y ghostscript tesseract-ocr enscript pandoc r-base r-base-dev 
 
 ## R
 
-`R` has some dependencies that are not available in Ubuntu 16.04 (Xenial) PPAs. They need to be installed into the `R` environment directly.
+`R` has some dependencies that are not available from Ubuntu 16.04 (Xenial) PPAs. They need to be installed into the `R` environment directly.
 
 Execute the following to open the `R` command prompt:
 
