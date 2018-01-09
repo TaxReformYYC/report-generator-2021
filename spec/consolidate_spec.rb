@@ -68,6 +68,9 @@ describe Proptax::Consolidator do
       end
     end
 
+    #
+    # TODO: get rasterized PDF, as produced by Windows 7
+    #
 #    it 'returns a CSV-ready record from tesseract text extraction' do
 #      csv = Proptax::Consolidator.parse File.read('spec/data/tesseract-sample.txt')
 #      expected_imperial = ['000000422', '80 FAKE ST NW', '599000', 'Sales Comparison',
@@ -97,7 +100,6 @@ describe Proptax::Consolidator do
       expected_imperial.each_with_index do |val, index|
         expect(csv[index]).to eq(val)
       end
-      expect(false).to eq(true)
     end
   end
 

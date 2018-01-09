@@ -19,9 +19,18 @@ module Proptax
                'Constructed On Original Foundation', 'Modified For Disabled', 'Old House On New Foundation',
                'Basementless', 'Penthouse']
 
+    #
+    # Keys that can be assigned multiple values
+    #
+    MultiFieldHeaders = ['Influences']
+
+    #
+    # Section headers for publicly available assessment data for 2018.
+    #
+    Sections = ['Assessment Details', 'Assessment Approach', 'Location Details', 'Land Details', 'Building Details']
   
     #
-    # Convert a directory containing 2016 PDF assessment reports to text and
+    # Convert a directory containing 2018 PDF assessment reports to text and
     # write the relevant CSV information to stdout
     #
     # @param string - path to directory containing PDFs
@@ -75,21 +84,37 @@ module Proptax
         next if line.empty?
   
         if current_header
-          csv_hash[current_header] = clean(line, current_header)
-          current_header = nil
-        elsif Headers.include? line
-          current_header = line
-        # For tesseract-extracted text
-        else
-          Headers.each do |header|
-            current_header = line[Regexp.new("^#{Regexp.escape(header)}")]
-            break if current_header
+          if Sections.include? line
+            current_header = nil 
+            next
           end
-          if current_header
-            line = line.gsub(Regexp.new("^#{Regexp.escape(current_header)}"), '').strip
+
+          if MultiFieldHeaders.include? current_header
+            if csv_hash[current_header].nil?
+              csv_hash[current_header] = clean(line, current_header)
+            else
+              csv_hash[current_header] += "/#{clean(line, current_header)}"
+            end
+          else
             csv_hash[current_header] = clean(line, current_header)
             current_header = nil
           end
+        elsif Headers.include? line
+          current_header = line
+        #
+        # Need a rasterized report (a la, Windows 7)
+        #
+        # For tesseract-extracted text
+#        else
+#          Headers.each do |header|
+#            current_header = line[Regexp.new("^#{Regexp.escape(header)}")]
+#            break if current_header
+#          end
+#          if current_header
+#            line = line.gsub(Regexp.new("^#{Regexp.escape(current_header)}"), '').strip
+#            csv_hash[current_header] = clean(line, current_header)
+#            current_header = nil
+#          end
         end
       end
       Headers.map { |header| csv_hash[header] || '0' }
@@ -119,7 +144,7 @@ module Proptax
            'Old House On New Foundation',
            'Basementless',
            'Penthouse',
-            'Market Adjustment'
+           'Market Adjustment'
         text = text == 'Yes' ? 'T' : 'F'
       end
       text
