@@ -1,0 +1,292 @@
+---
+title: 2018 Property Assessment Analysis
+author: Prepared by reports@taxreformyyc.com
+geometry: margin=1.5cm
+---
+
+```{r loadLibraries, echo=FALSE, message=FALSE}
+# Load the required libraries
+library(knitr)
+library(scales)
+library(formattable)
+library(ggplot2)
+```
+
+```{r defineConstants, echo=FALSE}
+# Constants
+address <- "<%= address %>"
+myAssessedValue <- <%= assessed_value %>
+csvFile <- "<%= csv_file %>"
+
+# Get the house number and street name
+m <- regexpr("^\\d+", address, perl=TRUE)
+myHouseNumber <- regmatches(address, m)
+#myHouseNumber <- gsub("[^\\d]+", "", address, perl=TRUE)
+myStreetName <- gsub(".*[\\d]", "", address, perl=TRUE)
+
+# How do this factors impact an assessment?
+unknownImpact <- c('Taxation.Status', 'Assessment.Class',
+                   'Property.Type', 'Property.Use', 'Valuation.Approach',
+                   'Market.Adjustment', 'Community', 'Market.Area', 'Sub.Neighbourhood.Code..SNC.',
+                   'Sub.Market.Area', 'Influences', 'Land.Use.Designation', 'Building.Count',
+                   'Building.Type.Structure', 'Year.of.Construction', 'Quality', 'Basement.Suite',
+                   'Walkout.Basement', 'Garage.Type', 'Fireplace.Count',
+                   'Constructed.On.Original.Foundation', 'Modified.For.Disabled',
+                   'Old.House.On.New.Foundation', 'Basementless', 'Penthouse')
+
+# These factors are informational and don't affect the assessment
+noImpact <- c('Roll.Number', 'Location.Address')
+```
+
+```{r loadData, echo=FALSE}
+# Load data
+data <- read.csv(csvFile, header=TRUE)
+```
+
+```{r getMetaData, echo=FALSE}
+streetAddresses <- data[,noImpact[2]]
+
+# Remove the street names from the addresses
+#houseNumbers <- as.numeric(gsub("[^\\d]+", "", streetAddresses, perl=TRUE))
+m <- regexpr("^\\d+", streetAddresses, perl=TRUE)
+houseNumbers <- as.numeric(regmatches(streetAddresses, m))
+```
+
+\center
+`r paste(min(houseNumbers), "-", max(houseNumbers), myStreetName, sep=" ")`
+
+\flushleft
+
+# Synopsis
+
+This analysis pertains to the property located at **`r address`**.
+It documents the treatment of the assessment data provided by the City of
+Calgary for the pertinent property and those adjacent on the street
+(i.e., buildings `r paste(min(houseNumbers), "-", max(houseNumbers), sep=" ")`)
+The data under investigation was obtained from
+[assessmentsearch.calgary.ca](https://assessmentsearch.calgary.ca) and
+is presented alongside this document in a consolidated CSV file.
+
+# Approach Overview
+
+The data investigated in this analysis consists of properties constrained to
+one street on one city block. No properties were omitted to ensure the integrity
+of this report and its conclusion.
+
+Given that there are many factors contained in the data whose precise impact on
+assessed values are unknown, commonalities are identified and omitted from 
+consideration, as all such factors should have identical impact on the
+final assessment.
+
+Factors that vary are identified and presented for consideration, as
+transparency and integrity is of the utmost importance. Again, the precise
+impact of these factors on the final assessment is unknown, as the weights
+assigned by the City of Calgary are not divulged in the assessment data they
+provide. 
+
+Having acknowledged the factors that cannot easily be quantified, the focus
+turns to the properties' lot sizes, total developed area, and assessed values.
+By visualizing the relationship between these quantifiable factors, the 
+pertinent property's assessed value is contrasted with those of neighbouring
+properties. The conclusion of this analysis is drawn from the underlying data.
+
+# Identify common factors
+
+Many of the factors that impact the assessments are identical. This data can
+safely be removed from consideration, as the impact on the assessed values
+should be the same for all the properties under investigation.
+
+```{r commonFactors, echo=FALSE}
+# Identify common factors
+headers <- c()
+identical <- c()
+displayHeaders <- c()
+for (col in colnames(data)) {
+  values = data[,col][!duplicated(data[,col])]
+  if (length(values) == 1) {
+    headers <- append(headers, col)
+    displayHeaders <-append(displayHeaders, gsub("\\.", " ", col, perl=TRUE))
+    identical <- append(identical, toString(values))
+  }
+}
+commonFactors <- data.frame(headers, displayHeaders, identical)
+```
+
+Here, **`r length(commonFactors$headers)`** common factors can safely be 
+removed from the data set:
+
+`r kable(data.frame(commonFactors$displayHeaders, commonFactors$identical),
+         col.names=c('Factors', 'Identical Values'), align=c('l', 'r'))`
+
+```{r removeCommonFactors, echo=FALSE}
+# Remove common factors
+data <- data[,!(names(data) %in% commonFactors$headers)]
+```
+
+
+# Identify unknown and non-impacting factors
+
+Of the **`r length(colnames(data))`** remaining columns, some cannot be
+quantified. Others certainly impact the assessed value of a property, but the
+assessment data provided by the City of Calgary does not reveal to what extent.
+
+## Non-impacting factors
+
+```{r noImpactDisplayHeaders, echo=FALSE}
+# Remove the dots from the header name
+noImpactDisplayHeaders <- gsub("\\.", " ", noImpact, perl=TRUE)
+```
+
+These factors cannot be quantified and are administrative in purpose:
+
+`r kable(noImpactDisplayHeaders, col.names=c('Non-Impacting Factors'))`
+
+```{r removeIrrelevantFactors, echo=FALSE}
+data <- data[,!(names(data) %in% noImpact)]
+```
+
+These are removed and the remaining **`r length(colnames(data))`** columns are
+carried forward.
+
+## Unknown factors
+
+The impact these remaining columns have on assessment values is unknown:
+
+```{r identifyUnknowns, echo=FALSE}
+# Identify unknown factors
+unknownFactors <- names(data[,names(data) %in% unknownImpact])
+```
+
+`r kable(gsub("\\.", " ", unknownFactors), col.names=c('Unknown Factors'))`
+
+The variability within these unknown columns is presented here in the interest
+of transparency:
+
+```{r consolidateUnknownFactors, echo=FALSE}
+consolidatedUnknownFactors <- data[,(names(data) %in% c(unknownFactors))]
+rownames(consolidatedUnknownFactors) <- houseNumbers
+```
+
+`r kable(consolidatedUnknownFactors[order(as.numeric(row.names(consolidatedUnknownFactors))),],
+         align=c(rep('c', length(unknownFactors))),
+         row.names=TRUE,
+         col.names=gsub("\\.", " ", unknownFactors))`
+
+These undoubtedly have an impact on the valuation, but their precise weighting
+and significance are not presented in the assessment data provided by the City
+of Calgary. As such, they are removed from the dataset.
+
+```{r removeUnknownFactors, echo=FALSE}
+# Remove unknown factors from data set
+data <- data[,!(names(data) %in% unknownFactors)]
+```
+
+The remaining **`r length(colnames(data))`** columns contain the following data:
+
+```{r addRowNamesToData, echo=FALSE}
+# Add row names to data
+rownames(data) <- houseNumbers
+```
+
+`r kable(data[order(as.numeric(row.names(data))),], row.names=TRUE, col.names=gsub("\\.", " ", colnames(data)))`
+
+# Visualization
+
+The raw data presented above is summarized in Figure 1. It
+illustrates the disparity between the assessed property values. The pertinent
+property is coloured red.
+
+The blue line running through the graph is _best fit_ for the visualized model.
+It serves as a predictor, or indicator, as to where the properties in question
+should be positioned.
+
+The pertinent property's overassessment is determined by measuring the distance
+between the red point and the blue line.
+
+
+```{r adjustValues, echo=FALSE}
+# Sum each property's lot size and total developed space
+areaTotals <- rowSums(data[,-1])
+
+# Isolate all assessed values
+assessedValues <- data[,1]
+
+# Plot the best fit regression line
+reg <- lm(assessedValues~areaTotals)
+
+# Plot distances between points and the regression line
+assessedDifferences <- residuals(reg)
+adjustedValues <- predict(reg)
+
+# Reconcile adjusted property values
+adjustedProperties <- data.frame(houseNumbers, adjustedValues, assessedDifferences)
+```
+
+```{r generatePlot, fig.cap=paste(myHouseNumber, "Overassessment", " "), fig.width=12, echo=FALSE}
+plot.title <- paste(min(houseNumbers), "-", max(houseNumbers), myStreetName, sep=" ")
+plot.subtitle = 'Current Assessed Property Values'
+ggplot(data, aes(x=areaTotals, y=assessedValues)) +
+    # Plot title
+    ggtitle(bquote(atop(bold(.(plot.title)), atop(italic(.(plot.subtitle)), "")))) +
+    theme(plot.title=element_text(size=24)) +
+
+    # Axis labels
+    ylab("Assessed House Values on your Street") +
+    xlab("Total House and Lot Size (Sq. Feet)") +
+    theme(axis.title.x=element_text(size=18, face="bold", margin=margin(20,0,0,0)),
+          axis.title.y=element_text(size=18, face="bold", margin=margin(0,20,0,0))) +
+
+    # Axis tick labels
+    scale_x_continuous(labels=comma) +
+<% if opts.ylimit? %>
+    scale_y_continuous(labels=dollar, breaks=pretty_breaks(n=10),
+                       limits=c(min(assessedValues)-<%= opts.ylimit %>, max(assessedValues)+<%= opts.ylimit %>)) +
+<% else %>
+    scale_y_continuous(labels=dollar, breaks=pretty_breaks(n=10)) +
+<% end %>
+    # Scatter plot points
+    geom_point(shape=ifelse(assessedValues==myAssessedValue, 16, 1),
+               size=ifelse(assessedValues==myAssessedValue, 5, 4),
+               colour=ifelse(assessedValues==myAssessedValue, "red", "blue")) +
+
+    # Point labels
+    geom_text(aes(label=houseNumbers), hjust=0.5, vjust=-2, size=5) +
+    geom_text(aes(label=paste("$", accounting(assessedValues, format="d"), sep="")),
+              hjust=0.5, vjust=-1.2) +
+
+    # Best fit line
+    geom_smooth(method=lm) #+ 
+```
+
+# Conclusion 
+
+The data investigated in this analysis describes the factors considered in
+assessing the properties located at 
+`r paste(min(houseNumbers), "-", max(houseNumbers), myStreetName, sep=" ")`.
+It was collected and provided by the City of Calgary. This report set out to
+quantify the disparity between the pertinent property (i.e., `r address`) and
+the neighbouring properties on its street.
+
+Common factors were identified and eliminated from the analysis. Similarly,
+varying factors were identified, catalogued, and removed from consideration. The
+City of Calgary's property reports do not describe how these characteristic
+features are quantified and weighted in determining a property's assessed
+value. As such, they could not be included.
+
+The conclusions that follow are drawn from comparing lot sizes, total developed
+area, and assessed values. The underlying data and the overall approach have
+been presented in full.
+
+## Overvaluation: `r currency(adjustedProperties[houseNumbers==myHouseNumber,]$assessedDifferences)`
+
+This investigation compared the assessed values with lot sizes and developed
+square footage. It has revealed that that the pertinent property is overvalued
+by 
+**`r currency(adjustedProperties[houseNumbers==myHouseNumber,]$assessedDifferences)`**.
+
+## Corrected Assessed Value: `r currency(adjustedProperties[houseNumbers==myHouseNumber,]$adjustedValues)`
+
+In order to bring the pertinent property's assessed value in line with those of
+its immediate neighbours, it must be reassessed at
+**`r currency(adjustedProperties[houseNumbers==myHouseNumber,]$adjustedValues)`**.
+
