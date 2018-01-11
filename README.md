@@ -24,7 +24,7 @@ The following commands will install all third party dependencies:
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository 'deb [arch=amd64,i386] https://cran.rstudio.com/bin/linux/ubuntu xenial/'
 sudo apt update
-sudo apt install -y ghostscript tesseract-ocr enscript pandoc r-base r-base-dev r-cran-ggplot2 r-cran-scales libmagick++-dev mesa-common-dev libglu1-mesa-dev
+sudo apt install -y ghostscript tesseract-ocr enscript pandoc r-base r-base-dev r-cran-ggplot2 r-cran-scales libmagick++-dev mesa-common-dev libglu1-mesa-dev texlive-fonts-recommended texlive-latex-recommended
 ``` 
 
 ## R
