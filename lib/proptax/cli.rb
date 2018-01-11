@@ -2,20 +2,20 @@
 require 'thor'
 require 'proptax'
 #require 'proptax/generators/promo'
-#require 'proptax/generators/report'
+require 'proptax/generators/report'
 module Proptax
   class CLI < Thor
-#    check_unknown_options!
-#
-#    # 2016-2-29 http://stackoverflow.com/questions/14346285/how-to-make-two-thor-tasks-share-options
-#    shared_options = [:ylimit, {
-#                        :type => :string,
-#                        :default => "10000",
-#                        :description => "Expand y-axis limits"}]
-#    report_options = [:template, {
-#                        :type => :string,
-#                        :default => "default",
-#                        :description => "Apply specific template: [default, cherry-picked]"}]
+    check_unknown_options!
+
+    # 2016-2-29 http://stackoverflow.com/questions/14346285/how-to-make-two-thor-tasks-share-options
+    shared_options = [:ylimit, {
+                        :type => :string,
+                        :default => "10000",
+                        :description => "Expand y-axis limits"}]
+    report_options = [:template, {
+                        :type => :string,
+                        :default => "default",
+                        :description => "Apply specific template: [default, cherry-picked]"}]
 #    consolidate_options = [:consolidate, {
 #                            :type => :boolean,
 #                            :default => true,
@@ -34,21 +34,21 @@ module Proptax
 #      generate_material("promos")
 #    end
 #
-#    desc "reports CSV_FILE", "Generate assessment reports"
-#    method_option *shared_options
-#    method_option *report_options
+    desc "reports CSV_FILE", "Generate assessment reports"
+    method_option *shared_options
+    method_option *report_options
 #    method_option *consolidate_options
-#    def reports(dir)
-#      csv_file = 'consolidated.csv'
-#      if options.consolidate?
-#        `proptax consolidate #{dir} > #{csv_file}`
-#      else
-#        csv_file = "#{dir}/consolidated.csv"
-#      end
-#      Proptax::Generators::Report.start([csv_file, options])
-#      generate_material("reports")
-#    end
-#
+    def reports(dir)
+      csv_file = 'consolidated.csv'
+      if options.consolidate?
+        `proptax consolidate #{dir} > #{csv_file}`
+      else
+        csv_file = "#{dir}/consolidated.csv"
+      end
+      Proptax::Generators::Report.start([csv_file, options])
+      generate_material("reports")
+    end
+
 #    desc "auto DIR", "Automatically create CSV file and promotional fliers"
 #    method_option *shared_options
 #    method_option *report_options
@@ -85,17 +85,18 @@ module Proptax
       end
     end
 
-#    no_commands do
-#      def generate_material(dir)
-#        Dir.foreach(dir) do |file|
-#          if /\.Rmd/.match(file)
-#            puts "#{file}" 
-#            `cd "#{dir}" && Rscript -e "library('knitr'); knit('#{file}');"`
-#            file.gsub!('.Rmd', '.md')
-#            `cd "#{dir}" && Rscript -e "library('knitr'); pandoc('#{file}', format = 'latex');"`
-#          end
-#        end
-#      end
-#    end
+    no_commands do
+      def generate_material(dir)
+        puts "DIR: #{dir}"
+        Dir.foreach(dir) do |file|
+          if /\.Rmd/.match(file)
+            puts "#{file}" 
+            `cd "#{dir}" && Rscript -e "library('knitr'); knit('#{file}');"`
+            file.gsub!('.Rmd', '.md')
+            `cd "#{dir}" && Rscript -e "library('knitr'); pandoc('#{file}', format = 'latex');"`
+          end
+        end
+      end
+    end
   end
 end
