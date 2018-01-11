@@ -10,20 +10,11 @@ module Proptax
       argument :opts
 
       def create_report_dir
-        puts "create_report_dir"
         empty_directory('reports')
         FileUtils.cp(csv_file, "reports")
       end
 
       def copy_report_template
-        puts "copy_report_template"
-        template = 'default'
-        if opts.template?
-          case opts.template
-          when 'cherry-picked'
-            template = 'cherry-picked'
-          end
-        end
         CSV.foreach(csv_file, headers: true) do |row|
           self.address = row['Location Address']
           self.assessed_value = row['Current Assessed Value']
@@ -33,7 +24,6 @@ module Proptax
       end
 
       def self.source_root
-        puts "self.source_root"
         File.dirname(__FILE__) + "/report"
       end
     end
