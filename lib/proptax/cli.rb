@@ -1,7 +1,5 @@
-#require 'csv'
 require 'thor'
 require 'proptax'
-#require 'proptax/generators/promo'
 require 'proptax/generators/report'
 module Proptax
   class CLI < Thor
@@ -20,20 +18,12 @@ module Proptax
 #                            :type => :boolean,
 #                            :default => true,
 #                            :description => "Consolidate the PDFs before generating the report"}] 
-#
+
     desc "consolidate DIR", "Outputs CSV data extracted from 2018 property assessment reports"
     def consolidate(dir)
       Proptax::Consolidator.process(dir)
     end
 
-#    desc "promos CSV_FILE", "Generate promotional fliers"
-#    method_option *shared_options
-#    def promos(dir)
-#      `proptax consolidate #{dir} > consolidated.csv`
-#      Proptax::Generators::Promo.start(['consolidated.csv', options])
-#      generate_material("promos")
-#    end
-#
     desc "reports CSV_FILE", "Generate assessment reports"
     method_option *shared_options
     method_option *report_options
@@ -49,16 +39,14 @@ module Proptax
       generate_material("reports")
     end
 
-#    desc "auto DIR", "Automatically create CSV file and promotional fliers"
-#    method_option *shared_options
-#    method_option *report_options
-#    def auto(dir)
-#      `proptax consolidate #{dir} > consolidated.csv`
-#      Proptax::Generators::Promo.start(['consolidated.csv', options])
-#      Proptax::Generators::Report.start(['consolidated.csv', options])
-#      generate_material("promos")
-#      generate_material("reports")
-#    end
+    desc "auto DIR", "Automatically create CSV file and reports"
+    method_option *shared_options
+    method_option *report_options
+    def auto(dir)
+      `proptax consolidate #{dir} > consolidated.csv`
+      Proptax::Generators::Report.start(['consolidated.csv', options])
+      generate_material("reports")
+    end
 
     desc "filter CSV_FILE", "Calculate and display assessment discrepancies"
     method_option :csv,
