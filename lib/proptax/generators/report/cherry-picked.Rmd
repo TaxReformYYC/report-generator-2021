@@ -233,7 +233,7 @@ plot.subtitle = 'Current Assessed Property Values'
 ggplot(data, aes(x=areaTotals, y=assessedValues)) +
     # Plot title
     ggtitle(bquote(atop(bold(.(plot.title)), atop(italic(.(plot.subtitle)), "")))) +
-    theme(plot.title=element_text(size=24)) +
+    theme(plot.title=element_text(size=24, hjust = 0.5)) +
 
     # Axis labels
     ylab("Assessed House Values on your Street") +
