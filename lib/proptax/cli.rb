@@ -75,7 +75,6 @@ module Proptax
 
     no_commands do
       def generate_material(dir)
-        puts "DIR: #{dir}"
         Dir.foreach(dir) do |file|
           if /\.Rmd/.match(file)
             puts "#{file}" 
