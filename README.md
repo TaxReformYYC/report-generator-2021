@@ -135,11 +135,6 @@ bundle exec rake release
 
 This will create a `git` tag for the version, push `git` commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org):
 
-```
-bundle exec rake build
-gem push pkg/proptax-0.1.0.gem # Note version number
-```
-
 # Contributing
 
 Bug reports and pull requests are welcome.
