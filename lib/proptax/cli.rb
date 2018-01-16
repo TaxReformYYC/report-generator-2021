@@ -24,7 +24,7 @@ module Proptax
       Proptax::Consolidator.process(dir)
     end
 
-    desc "reports CSV_FILE", "Generate assessment reports"
+    desc "reports DIR", "Generate assessment reports (assumes `DIR/consolidated.csv`)"
     method_option *shared_options
     method_option *report_options
 #    method_option *consolidate_options
