@@ -30,7 +30,7 @@ unknownImpact <- c('Taxation.Status', 'Assessment.Class',
                    'Market.Adjustment', 'Community', 'Market.Area', 'Sub.Neighbourhood.Code..SNC.',
                    'Sub.Market.Area', 'Influences', 'Land.Use.Designation', 'Building.Count',
                    'Building.Type.Structure', 'Year.of.Construction', 'Quality', 'Basement.Suite',
-                   'Walkout.Basement', 'Garage.Type', 'Fireplace.Count',
+                   'Walkout.Basement', 'Garage.Type', 'Fireplace.Count', 'Renovation',
                    'Constructed.On.Original.Foundation', 'Modified.For.Disabled',
                    'Old.House.On.New.Foundation', 'Basementless', 'Penthouse')
 
@@ -202,7 +202,6 @@ should be positioned.
 
 The pertinent property's overassessment is determined by measuring the distance
 between the red point and the blue line.
-
 
 ```{r adjustValues, echo=FALSE}
 # Sum each property's lot size and total developed space

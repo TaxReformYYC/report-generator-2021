@@ -25,14 +25,14 @@ myHouseNumber <- regmatches(address, m)
 myStreetName <- gsub(".*[\\d]", "", address, perl=TRUE)
 
 # How do this factors impact an assessment?
-unknownImpact <- c('Valuation.Approach', 'Assessment.Class',
-                   'Property.Type', 'Property.Use', 'Taxation.Status',
-                   'Community', 'Sub.Neighbourhood.Code..SNC.', 'Market.Area',
-                   'Sub.Market.Area', 'Land.Use.Designation',
-                   'Building.Count', 'Building.Type.Structure', 
-                   'Year.of.Construction', 'Quality', 'Basement.Suite',
-                   'Walkout.Basement', 'Garage.Type', 'Fireplace',
-                   'Influences', 'Market.Adjustment')
+unknownImpact <- c('Taxation.Status', 'Assessment.Class',
+                   'Property.Type', 'Property.Use', 'Valuation.Approach',
+                   'Market.Adjustment', 'Community', 'Market.Area', 'Sub.Neighbourhood.Code..SNC.',
+                   'Sub.Market.Area', 'Influences', 'Land.Use.Designation', 'Building.Count',
+                   'Building.Type.Structure', 'Year.of.Construction', 'Quality', 'Basement.Suite',
+                   'Walkout.Basement', 'Garage.Type', 'Fireplace.Count', 'Renovation',
+                   'Constructed.On.Original.Foundation', 'Modified.For.Disabled',
+                   'Old.House.On.New.Foundation', 'Basementless', 'Penthouse')
 
 # These factors are informational and don't affect the assessment
 noImpact <- c('Roll.Number', 'Location.Address')
