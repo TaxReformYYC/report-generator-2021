@@ -43,7 +43,7 @@ describe Proptax::Consolidator do
                            'Rocky Ridge', 'SNGLRES WEST', '001', 'SNGLRES B', 
                            'Traffic Collector', 'Residential - Contextual One Dwelling', '4929', '1',
                            'House / 2 Storey', '2002', 'Average', '1911', '680', 'F', 'F', 'Attached', '608', '1',
-                           'F', 'F', 'F', 'F', 'F']
+                           'unk.', 'F', 'F', 'F', 'F', 'F']
 
       expect(csv.length).to eq(expected_imperial.length)
       expect(csv.length).to eq(Proptax::Consolidator::Headers.length)
@@ -59,7 +59,7 @@ describe Proptax::Consolidator do
                            'Rocky Ridge', 'SNGLRES WEST', '001', 'SNGLRES B', 
                            'Traffic Collector', 'Residential - Contextual One Dwelling', '4176', '1',
                            'House / 2 Storey', '2002', 'Average', '1831', '0', 'F', 'T', 'Attached', '396', '1',
-                           'F', 'F', 'F', 'F', 'F']
+                           'unk.', 'F', 'F', 'F', 'F', 'F']
 
       expect(csv.length).to eq(expected_imperial.length)
       expect(csv.length).to eq(Proptax::Consolidator::Headers.length)
@@ -93,7 +93,7 @@ describe Proptax::Consolidator do
                            'Green Space - Athletic Field Road/Corner Lot/Traffic Collector', 
                            'Residential - Contextual One Dwelling', '5368', '1', 'House / 2 Storey',
                            '2000', 'Average', '1940', '602', 'F', 'F', 'Attached', '420', '1',
-                           'F', 'F', 'F', 'F', 'F']
+                           'unk.', 'F', 'F', 'F', 'F', 'F']
 
       expect(csv.length).to eq(expected_imperial.length)
       expect(csv.length).to eq(Proptax::Consolidator::Headers.length)

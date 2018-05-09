@@ -15,7 +15,7 @@ module Proptax
                'Sub Market Area', 'Influences', 'Land Use Designation', 'Assessable Land Area',
                'Building Count', 'Building Type/Structure', 'Year of Construction',
                'Quality', 'Total Living Area Above Grade', 'Living Area Below Grade', 'Basement Suite',
-               'Walkout Basement', 'Garage Type', 'Garage Area', 'Fireplace Count',
+               'Walkout Basement', 'Garage Type', 'Garage Area', 'Fireplace Count', 'Renovation',
                'Constructed On Original Foundation', 'Modified For Disabled', 'Old House On New Foundation',
                'Basementless', 'Penthouse']
 
@@ -117,7 +117,14 @@ module Proptax
 #          end
         end
       end
-      Headers.map { |header| csv_hash[header] || '0' }
+#      Headers.map { |header| csv_hash[header] || '0' }
+      Headers.map do |header|
+        if header == 'Renovation'
+          csv_hash[header] || 'unk.' 
+        else
+          csv_hash[header] || '0' 
+        end
+      end
     end
   
     #
