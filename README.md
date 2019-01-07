@@ -125,6 +125,12 @@ bin/setup
 bundle exec rake spec
 ```
 
+To run a single test:
+
+```
+bundle exec rake spec SPEC=spec/cli_consolidator_spec.rb
+```
+
 ### To execute the `proptax` script within the development environment:
 
 ```
