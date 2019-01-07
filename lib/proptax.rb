@@ -14,10 +14,8 @@ module Proptax
                'Market Adjustment', 'Community', 'Market Area', 'Sub Neighbourhood Code (SNC)',
                'Sub Market Area', 'Influences', 'Land Use Designation', 'Assessable Land Area',
                'Building Count', 'Building Type/Structure', 'Year of Construction',
-               'Quality', 'Total Living Area Above Grade', 'Living Area Below Grade', 'Basement Suite',
-               'Walkout Basement', 'Garage Type', 'Garage Area', 'Fireplace Count', 'Renovation',
-               'Constructed On Original Foundation', 'Modified For Disabled', 'Old House On New Foundation',
-               'Basementless', 'Penthouse']
+               'Quality', 'Total Living Area Above Grade', 'Living Area Below Grade',
+               'Garage Area', 'Fireplace Count']
 
     #
     # Keys that can be assigned multiple values
@@ -144,14 +142,16 @@ module Proptax
            'Living Area Below Grade',
            'Garage Area'
         text = text.split(' ')[0].gsub(/,/, '')
-      when 'Basement Suite',
-           'Walkout Basement',
-           'Constructed On Original Foundation',
-           'Modified For Disabled',
-           'Old House On New Foundation',
-           'Basementless',
-           'Penthouse',
-           'Market Adjustment'
+#      when 'Basement Suite',
+#           'Walkout Basement',
+#           'Constructed On Original Foundation',
+#           'Modified For Disabled',
+#           'Old House On New Foundation',
+#           'Basementless',
+#           'Penthouse',
+#           'Market Adjustment'
+#        text = text == 'Yes' ? 'T' : 'F'
+      when 'Market Adjustment'
         text = text == 'Yes' ? 'T' : 'F'
       end
       text
