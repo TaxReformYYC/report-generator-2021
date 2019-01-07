@@ -1,21 +1,21 @@
 Property Summary Report
 Your property assessment is based on The City of Calgary's estimate of the
-market value for your property on July 1, 2017 and characteristics and
-physical condition on December 31, 2017.
+market value for your property on July 1, 2018 and characteristics and
+physical condition on December 31, 2018.
 - Assessment information last updated:
 
 Current Assessed Value:
 
-497,000
+477,000
 
-December 27, 2017
+December 18, 2018
 
 This Property Detail Report serves as the Assessment Explanation Supplement for this property type.
 
 Assessment Details
 Roll Number
 
-000000421
+000000608
 
 Location Address
 
@@ -53,7 +53,7 @@ Rocky Ridge
 
 Market Area
 
-SNGLRES WEST
+SNGLRES NORTH
 
 Sub Neighbourhood Code (SNC)
 
@@ -61,7 +61,7 @@ Sub Neighbourhood Code (SNC)
 
 Sub Market Area
 
-SNGLRES B
+SNGLRES A
 
 Influences
 
@@ -97,17 +97,9 @@ Total Living Area Above Grade
 
 1,831 sq. ft. / 170 sq. m.
 
-Basement Suite
-
-No
-
 Walkout Basement
 
 Yes
-
-Garage Type
-
-Attached
 
 Garage Area
 
@@ -117,28 +109,8 @@ Fireplace Count
 
 1
 
-Constructed On Original Foundation
-
-No
-
-Modified For Disabled
-
-No
-
-Old House On New Foundation
-
-No
-
-Basementless
-
-No
-
-Penthouse
-
-No
-
 Note: If you have questions or need information, contact Assessment at 403-268-2888.
-Printed On: January 05, 2018 16:21:18
+Printed On: January 03, 2019 13:05:14
 
 Page: 1 of
 

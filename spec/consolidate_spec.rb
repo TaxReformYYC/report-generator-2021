@@ -38,12 +38,11 @@ describe Proptax::Consolidator do
   describe '#parse' do
     it 'returns a CSV-ready record' do
       csv = Proptax::Consolidator.parse File.read('spec/data/sample.txt')
-      expected_imperial = ['524500', '000000419', '11339 FAKE ST NW', 'Taxable', 'Residential 100%',
+      expected_imperial = ['539000', '000000907', '11339 FAKE ST NW', 'Taxable', 'Residential 100%',
                            'Land and Improvement', 'Single Residential', 'Sales Comparison', 'F',
-                           'Rocky Ridge', 'SNGLRES WEST', '001', 'SNGLRES B', 
+                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A', 
                            'Traffic Collector', 'Residential - Contextual One Dwelling', '4929', '1',
-                           'House / 2 Storey', '2002', 'Average', '1911', '680', 'F', 'F', 'Attached', '608', '1',
-                           'unk.', 'F', 'F', 'F', 'F', 'F']
+                           'House / 2 Storey', '2002', 'Average', '1911', '680', '608', '1']
 
       expect(csv.length).to eq(expected_imperial.length)
       expect(csv.length).to eq(Proptax::Consolidator::Headers.length)
@@ -54,12 +53,11 @@ describe Proptax::Consolidator do
 
     it 'returns a CSV-ready record with Below Grade value set to 0, if Below Grade not present' do
       csv = Proptax::Consolidator.parse File.read('spec/data/sample_no_below_grade.txt')
-      expected_imperial = ['497000', '000000421', '11311 FAKE ST NW', 'Taxable', 'Residential 100%',
+      expected_imperial = ['477000', '000000608', '11311 FAKE ST NW', 'Taxable', 'Residential 100%',
                            'Land and Improvement', 'Single Residential', 'Sales Comparison', 'F',
-                           'Rocky Ridge', 'SNGLRES WEST', '001', 'SNGLRES B', 
+                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A', 
                            'Traffic Collector', 'Residential - Contextual One Dwelling', '4176', '1',
-                           'House / 2 Storey', '2002', 'Average', '1831', '0', 'F', 'T', 'Attached', '396', '1',
-                           'unk.', 'F', 'F', 'F', 'F', 'F']
+                           'House / 2 Storey', '2002', 'Average', '1831', '0', '396', '1']
 
       expect(csv.length).to eq(expected_imperial.length)
       expect(csv.length).to eq(Proptax::Consolidator::Headers.length)
@@ -87,13 +85,12 @@ describe Proptax::Consolidator do
 
     it 'returns slash-seperated values for multiple influencing factors' do
       csv = Proptax::Consolidator.parse File.read('spec/data/sample_multi_influences.txt')
-      expected_imperial = ['501500', '000000420', '11303 FAKE ST NW', 'Taxable', 'Residential 100%',
+      expected_imperial = ['510000', '000000806', '11303 FAKE ST NW', 'Taxable', 'Residential 100%',
                            'Land and Improvement', 'Single Residential', 'Sales Comparison', 'F',
-                           'Rocky Ridge', 'SNGLRES WEST', '001', 'SNGLRES B', 
-                           'Green Space - Athletic Field Road/Corner Lot/Traffic Collector', 
+                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A', 
+                           'Traffic Collector/Green Space - Athletic Field Road/Corner Lot', 
                            'Residential - Contextual One Dwelling', '5368', '1', 'House / 2 Storey',
-                           '2000', 'Average', '1940', '602', 'F', 'F', 'Attached', '420', '1',
-                           'unk.', 'F', 'F', 'F', 'F', 'F']
+                           '2000', 'Average', '1940', '602', '420', '1']
 
       expect(csv.length).to eq(expected_imperial.length)
       expect(csv.length).to eq(Proptax::Consolidator::Headers.length)
@@ -129,9 +126,9 @@ describe Proptax::Consolidator do
     end
 
     it 'leaves only square footage from Garage Area' do
-      expect(Proptax::Consolidator.clean('420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[25])).to eq('420')
-      expect(Proptax::Consolidator.clean('1,420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[25])).to eq('1420')
-      expect(Proptax::Consolidator.clean('2,555,420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[25])).to eq('2555420')
+      expect(Proptax::Consolidator.clean('420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[22])).to eq('420')
+      expect(Proptax::Consolidator.clean('1,420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[22])).to eq('1420')
+      expect(Proptax::Consolidator.clean('2,555,420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[22])).to eq('2555420')
     end
   end
 end

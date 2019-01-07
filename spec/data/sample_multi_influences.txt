@@ -1,21 +1,21 @@
 Property Summary Report
 Your property assessment is based on The City of Calgary's estimate of the
-market value for your property on July 1, 2017 and characteristics and
-physical condition on December 31, 2017.
+market value for your property on July 1, 2018 and characteristics and
+physical condition on December 31, 2018.
 - Assessment information last updated:
 
 Current Assessed Value:
 
-501,500
+510,000
 
-December 27, 2017
+December 18, 2018
 
 This Property Detail Report serves as the Assessment Explanation Supplement for this property type.
 
 Assessment Details
 Roll Number
 
-000000420
+000000806
 
 Location Address
 
@@ -53,7 +53,7 @@ Rocky Ridge
 
 Market Area
 
-SNGLRES WEST
+SNGLRES NORTH
 
 Sub Neighbourhood Code (SNC)
 
@@ -61,13 +61,13 @@ Sub Neighbourhood Code (SNC)
 
 Sub Market Area
 
-SNGLRES B
+SNGLRES A
 
 Influences
 
+Traffic Collector
 Green Space - Athletic Field Road
 Corner Lot
-Traffic Collector
 
 Land Details
 Land Use Designation
@@ -103,18 +103,6 @@ Living Area Below Grade
 
 602 sq. ft. / 56 sq. m.
 
-Basement Suite
-
-No
-
-Walkout Basement
-
-No
-
-Garage Type
-
-Attached
-
 Garage Area
 
 420 sq. ft. / 39 sq. m.
@@ -123,52 +111,11 @@ Fireplace Count
 
 1
 
-Constructed On Original Foundation
-
-No
-
-Modified For Disabled
-
-No
-
-Old House On New Foundation
-
-No
-
-Basementless
-
-No
-
 Note: If you have questions or need information, contact Assessment at 403-268-2888.
-Printed On: January 05, 2018 16:22:01
+Printed On: January 03, 2019 13:05:21
 
 Page: 1 of
 
-2
-
-Property Summary Report
-Your property assessment is based on The City of Calgary's estimate of the
-market value for your property on July 1, 2017 and characteristics and
-physical condition on December 31, 2017.
-- Assessment information last updated:
-
-Current Assessed Value:
-
-501,500
-
-December 27, 2017
-
-This Property Detail Report serves as the Assessment Explanation Supplement for this property type.
-
-Penthouse
-
-No
-
-Note: If you have questions or need information, contact Assessment at 403-268-2888.
-Printed On: January 05, 2018 16:22:01
-
-Page: 2 of
-
-2
+1
 
 
