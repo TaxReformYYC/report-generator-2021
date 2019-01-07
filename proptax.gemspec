@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Daniel Bidulock"]
   spec.email         = ["daniel@capitolhill.ca"]
 
-  spec.summary       = %q{Automatically process and visualize residential property data collected by the City of Calgary in 2018.}
+  spec.summary       = %q{Automatically process and visualize residential property data collected by the City of Calgary in 2019.}
   spec.description   = %q{This software produces reports from property data collected and provided by the City of Calgary. The versions used in previous years have won three victories before Calgary's Assessment Review Board, the quasi-judicial body that rules on property tax appeals.}
-  spec.homepage      = "https://github.com/TaxReformYYC/report-generator-2018"
+  spec.homepage      = "https://github.com/TaxReformYYC/report-generator-2019"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.

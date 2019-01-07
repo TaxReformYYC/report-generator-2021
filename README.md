@@ -70,16 +70,16 @@ Last year I made a whole series of super-boring [YouTube tutorials](https://www.
 
 I collect reports for all the houses on my street - from one corner to the next - and save them into their own folder. I live on a very long street, so I collect 18 reports. You can do the same, or you can pick the houses against which you want to draw comparisons (see _cherry picking_ below). This is handy for when the City provides their own sales comparison reports as evidence before the ARB.
 
-Suppose all my reports are saved in `~/prop-reports-2018`. From the command line, I execute the following:
+Suppose all my reports are saved in `~/prop-reports-2019`. From the command line, I execute the following:
 
 ```
-proptax auto ~/prop-reports-2018
+proptax auto ~/prop-reports-2019
 ```
 
 This is as basic as you can get. You'll see the software's progress on the screen. Once completed, execute:
 
 ```
-ls -l ~/prop-reports-2018/reports/*.pdf
+ls -l ~/prop-reports-2019/reports/*.pdf
 ```
 
 You'll see the same property analysis for every house on your street. Find the one labelled with your address and see how you stack up against your neighbours. There are several related files in the newly-generated `reports/` directory. The PDFs are the ones I submit as evidence in my property tax appeals. I also submit `consolidated.csv`. It's from this CSV data that the reports are generated.
@@ -88,10 +88,10 @@ You'll see the same property analysis for every house on your street. Find the o
 
 Supposing you submit your PDF as evidence in your hearing before the ARB, the City will likely submit the houses against which they assessed your own house. These houses will probably be in your neighbourhood, but won't be all on your street. This requires a special `--template` command line option.
 
-Again, having saved your property reports in their own folder (e.g., `~/prop-reports-2018-cp`), execute:
+Again, having saved your property reports in their own folder (e.g., `~/prop-reports-2019-cp`), execute:
 
 ```
-proptax auto ~/prop-reports-2018-cp --template cherry-picked
+proptax auto ~/prop-reports-2019-cp --template cherry-picked
 ```
 
 The analysis is identical, only the language contained in the reports changes. Developers, create any report template you like and submit a pull request!
@@ -99,7 +99,7 @@ The analysis is identical, only the language contained in the reports changes. D
 As with the example above, your report and the reports for all the houses analyzed can be found here:
 
 ```
-ls -l ~/prop-reports-2018-cp/reports/*.pdf
+ls -l ~/prop-reports-2019-cp/reports/*.pdf
 ```
 
 # Development
@@ -109,13 +109,13 @@ Install third-party software as with _Setup > Dependencies_, above.
 Clone this repository:
 
 ```
-git clone https://github.com/TaxReformYYC/report-generator-2018.git
+git clone https://github.com/TaxReformYYC/report-generator-2019.git
 ```
 
 Install `ruby` dependencies:
 
 ```
-cd report-generator-2018
+cd report-generator-2019
 bin/setup
 ```
 

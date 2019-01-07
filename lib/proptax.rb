@@ -7,7 +7,7 @@ module Proptax
   require 'pathname'
 
     #
-    # Headers for publicly available assessment data for 2018.
+    # Headers for publicly available assessment data for 2019.
     #
     Headers = ['Current Assessed Value', 'Roll Number', 'Location Address', 'Taxation Status',
                'Assessment Class', 'Property Type', 'Property Use', 'Valuation Approach',
@@ -25,12 +25,12 @@ module Proptax
     MultiFieldHeaders = ['Influences']
 
     #
-    # Section headers for publicly available assessment data for 2018.
+    # Section headers for publicly available assessment data for 2019.
     #
     Sections = ['Assessment Details', 'Assessment Approach', 'Location Details', 'Land Details', 'Building Details']
   
     #
-    # Convert a directory containing 2018 PDF assessment reports to text and
+    # Convert a directory containing 2019 PDF assessment reports to text and
     # write the relevant CSV information to stdout
     #
     # @param string - path to directory containing PDFs
@@ -59,10 +59,10 @@ module Proptax
     end
   
     #
-    # Take text-converted 2018 assessment reports and extract the relevant data
+    # Take text-converted 2019 assessment reports and extract the relevant data
     # into an array.
     # 
-    # @param string - text converted 2018 assessment report
+    # @param string - text converted 2019 assessment report
     #
     # @return array
     #
