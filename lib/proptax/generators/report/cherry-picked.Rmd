@@ -32,7 +32,7 @@ unknownImpact <- c('Taxation.Status', 'Assessment.Class',
                    'Building.Type.Structure', 'Year.of.Construction', 'Quality', 'Basement.Suite',
                    'Walkout.Basement', 'Garage.Type', 'Fireplace.Count', 'Renovation',
                    'Constructed.On.Original.Foundation', 'Modified.For.Disabled',
-                   'Old.House.On.New.Foundation', 'Basementless', 'Penthouse')
+                   'Old.House.On.New.Foundation', 'Basementless', 'Penthouse', 'Features')
 
 # These factors are informational and don't affect the assessment
 noImpact <- c('Roll.Number', 'Location.Address')
