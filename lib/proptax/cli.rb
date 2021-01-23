@@ -19,7 +19,7 @@ module Proptax
 #                            :default => true,
 #                            :description => "Consolidate the PDFs before generating the report"}] 
 
-    desc "consolidate DIR", "Outputs CSV data extracted from 2019 property assessment reports"
+    desc "consolidate DIR", "Outputs CSV data extracted from 2021 property assessment reports"
     def consolidate(dir)
       Proptax::Consolidator.process(dir)
     end

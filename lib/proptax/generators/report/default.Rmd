@@ -1,5 +1,5 @@
 ---
-title: 2019 Property Assessment Analysis
+title: 2021 Property Assessment Analysis
 author: Prepared by reports@taxreformyyc.com
 geometry: margin=1.5cm
 ---
@@ -74,7 +74,7 @@ one street on one city block. No properties were omitted to ensure the integrity
 of this report and its conclusion.
 
 Given that there are many factors contained in the data whose precise impact on
-assessed values are unknown, commonalities are identified and omitted from 
+assessed values are unknown, commonalities are identified and omitted from
 consideration, as all such factors should have identical impact on the
 final assessment.
 
@@ -82,11 +82,11 @@ Factors that vary are identified and presented for consideration, as
 transparency and integrity is of the utmost importance. Again, the precise
 impact of these factors on the final assessment is unknown, as the weights
 assigned by the City of Calgary are not divulged in the assessment data they
-provide. 
+provide.
 
 Having acknowledged the factors that cannot easily be quantified, the focus
 turns to the properties' lot sizes, total developed area, and assessed values.
-By visualizing the relationship between these quantifiable factors, the 
+By visualizing the relationship between these quantifiable factors, the
 pertinent property's assessed value is contrasted with those of neighbouring
 properties. The conclusion of this analysis is drawn from the underlying data.
 
@@ -112,7 +112,7 @@ for (col in colnames(data)) {
 commonFactors <- data.frame(headers, displayHeaders, identical)
 ```
 
-Here, **`r length(commonFactors$headers)`** common factors can safely be 
+Here, **`r length(commonFactors$headers)`** common factors can safely be
 removed from the data set:
 
 `r kable(data.frame(commonFactors$displayHeaders, commonFactors$identical),
@@ -254,13 +254,13 @@ ggplot(data, aes(x=areaTotals, y=assessedValues)) +
               hjust=0.5, vjust=-1.2) +
 
     # Best fit line
-    geom_smooth(method=lm) #+ 
+    geom_smooth(method=lm) #+
 ```
 
-# Conclusion 
+# Conclusion
 
 The data investigated in this analysis describes the factors considered in
-assessing the properties located at 
+assessing the properties located at
 `r paste(min(houseNumbers), "-", max(houseNumbers), myStreetName, sep=" ")`.
 It was collected and provided by the City of Calgary. This report set out to
 quantify the disparity between the pertinent property (i.e., `r address`) and
@@ -280,7 +280,7 @@ been presented in full.
 
 This investigation compared the assessed values with lot sizes and developed
 square footage. It has revealed that that the pertinent property is overvalued
-by 
+by
 **`r currency(adjustedProperties[houseNumbers==myHouseNumber,]$assessedDifferences)`**.
 
 ## Corrected Assessed Value: `r currency(adjustedProperties[houseNumbers==myHouseNumber,]$adjustedValues)`
