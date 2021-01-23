@@ -1,25 +1,25 @@
 Property Summary Report
 Your property assessment is based on The City of Calgary's estimate of the
-market value for your property on July 1, 2018 and characteristics and
-physical condition on December 31, 2018.
+market value for your property on July 1, 2020 and characteristics and
+physical condition on December 31, 2020.
 - Assessment information last updated:
 
 Current Assessed Value:
 
-539,000
+465,000
 
-December 18, 2018
+January 07, 2021
 
 This Property Detail Report serves as the Assessment Explanation Supplement for this property type.
 
 Assessment Details
 Roll Number
 
-000000907
+438098303
 
 Location Address
 
-11339 FAKE ST NW
+11363 ROCKYVALLEY DR NW
 
 Taxation Status
 
@@ -74,7 +74,7 @@ Residential - Contextual One Dwelling
 
 Assessable Land Area
 
-4,929 sq. ft. / 458 sq. m. / 0.11 ac
+4,860 sq. ft. / 452 sq. m. / 0.11 ac
 
 Building Details
 Building Count
@@ -95,22 +95,26 @@ Average
 
 Total Living Area Above Grade
 
-1,911 sq. ft. / 178 sq. m.
+1,859 sq. ft. / 173 sq. m.
 
 Living Area Below Grade
 
-680 sq. ft. / 63 sq. m.
+488 sq. ft. / 45 sq. m.
+
+Garage Type
+
+Attached
 
 Garage Area
 
-608 sq. ft. / 57 sq. m.
+383 sq. ft. / 36 sq. m.
 
-Fireplace Count
+Features
 
-1
+Fireplace (1)
 
 Note: If you have questions or need information, contact Assessment at 403-268-2888.
-Printed On: January 03, 2019 13:04:51
+Printed On: January 22, 2021 11:50:21
 
 Page: 1 of
 

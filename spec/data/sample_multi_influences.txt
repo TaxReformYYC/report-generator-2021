@@ -1,25 +1,25 @@
 Property Summary Report
 Your property assessment is based on The City of Calgary's estimate of the
-market value for your property on July 1, 2018 and characteristics and
-physical condition on December 31, 2018.
+market value for your property on July 1, 2020 and characteristics and
+physical condition on December 31, 2020.
 - Assessment information last updated:
 
 Current Assessed Value:
 
-510,000
+485,500
 
-December 18, 2018
+January 07, 2021
 
 This Property Detail Report serves as the Assessment Explanation Supplement for this property type.
 
 Assessment Details
 Roll Number
 
-000000806
+438099806
 
 Location Address
 
-11303 FAKE ST NW
+11303 ROCKYVALLEY DR NW
 
 Taxation Status
 
@@ -65,9 +65,9 @@ SNGLRES A
 
 Influences
 
+Corner Lot
 Traffic Collector
 Green Space - Athletic Field Road
-Corner Lot
 
 Land Details
 Land Use Designation
@@ -103,16 +103,20 @@ Living Area Below Grade
 
 602 sq. ft. / 56 sq. m.
 
+Garage Type
+
+Attached
+
 Garage Area
 
 420 sq. ft. / 39 sq. m.
 
-Fireplace Count
+Features
 
-1
+Fireplace (1)
 
 Note: If you have questions or need information, contact Assessment at 403-268-2888.
-Printed On: January 03, 2019 13:05:21
+Printed On: January 22, 2021 11:56:12
 
 Page: 1 of
 

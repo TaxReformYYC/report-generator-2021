@@ -1,25 +1,25 @@
 Property Summary Report
 Your property assessment is based on The City of Calgary's estimate of the
-market value for your property on July 1, 2018 and characteristics and
-physical condition on December 31, 2018.
+market value for your property on July 1, 2020 and characteristics and
+physical condition on December 31, 2020.
 - Assessment information last updated:
 
 Current Assessed Value:
 
-477,000
+458,500
 
-December 18, 2018
+January 07, 2021
 
 This Property Detail Report serves as the Assessment Explanation Supplement for this property type.
 
 Assessment Details
 Roll Number
 
-000000608
+438099608
 
 Location Address
 
-11311 FAKE ST NW
+11311 ROCKYVALLEY DR NW
 
 Taxation Status
 
@@ -97,20 +97,21 @@ Total Living Area Above Grade
 
 1,831 sq. ft. / 170 sq. m.
 
-Walkout Basement
+Garage Type
 
-Yes
+Attached
 
 Garage Area
 
 396 sq. ft. / 37 sq. m.
 
-Fireplace Count
+Features
 
-1
+Walk Out Basement
+Fireplace (1)
 
 Note: If you have questions or need information, contact Assessment at 403-268-2888.
-Printed On: January 03, 2019 13:05:14
+Printed On: January 22, 2021 11:55:22
 
 Page: 1 of
 
