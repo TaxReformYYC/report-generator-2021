@@ -7,28 +7,37 @@ module Proptax
   require 'pathname'
 
     #
-    # Headers for publicly available assessment data for 2019.
+    # Headers for publicly available assessment data for 2021.
     #
+#    Headers = ['Current Assessed Value', 'Roll Number', 'Location Address', 'Taxation Status',
+#               'Assessment Class', 'Property Type', 'Property Use', 'Valuation Approach',
+#               'Market Adjustment', 'Community', 'Market Area', 'Sub Neighbourhood Code (SNC)',
+#               'Sub Market Area', 'Influences', 'Land Use Designation', 'Assessable Land Area',
+#               'Building Count', 'Building Type/Structure', 'Year of Construction',
+#               'Quality', 'Total Living Area Above Grade', 'Living Area Below Grade',
+#               'Garage Area', 'Fireplace Count']
+
     Headers = ['Current Assessed Value', 'Roll Number', 'Location Address', 'Taxation Status',
                'Assessment Class', 'Property Type', 'Property Use', 'Valuation Approach',
                'Market Adjustment', 'Community', 'Market Area', 'Sub Neighbourhood Code (SNC)',
                'Sub Market Area', 'Influences', 'Land Use Designation', 'Assessable Land Area',
                'Building Count', 'Building Type/Structure', 'Year of Construction',
                'Quality', 'Total Living Area Above Grade', 'Living Area Below Grade',
-               'Garage Area', 'Fireplace Count']
+               'Garage Type', 'Garage Area', 'Features']
 
     #
     # Keys that can be assigned multiple values
     #
-    MultiFieldHeaders = ['Influences']
+    MultiFieldHeaders = ['Influences', 'Features']
+    MultiFieldStoppers = ['Note: If you have questions or need information, contact Assessment at 403-268-2888.']
 
     #
-    # Section headers for publicly available assessment data for 2019.
+    # Section headers for publicly available assessment data for 2021.
     #
     Sections = ['Assessment Details', 'Assessment Approach', 'Location Details', 'Land Details', 'Building Details']
   
     #
-    # Convert a directory containing 2019 PDF assessment reports to text and
+    # Convert a directory containing 2021 PDF assessment reports to text and
     # write the relevant CSV information to stdout
     #
     # @param string - path to directory containing PDFs
@@ -57,10 +66,10 @@ module Proptax
     end
   
     #
-    # Take text-converted 2019 assessment reports and extract the relevant data
+    # Take text-converted 2021 assessment reports and extract the relevant data
     # into an array.
     # 
-    # @param string - text converted 2019 assessment report
+    # @param string - text converted 2021 assessment report
     #
     # @return array
     #
@@ -90,8 +99,10 @@ module Proptax
           if MultiFieldHeaders.include? current_header
             if csv_hash[current_header].nil?
               csv_hash[current_header] = clean(line, current_header)
-            else
+            elsif !MultiFieldStoppers.include? line
               csv_hash[current_header] += "/#{clean(line, current_header)}"
+            else
+              current_header = nil
             end
           else
             csv_hash[current_header] = clean(line, current_header)
@@ -142,15 +153,6 @@ module Proptax
            'Living Area Below Grade',
            'Garage Area'
         text = text.split(' ')[0].gsub(/,/, '')
-#      when 'Basement Suite',
-#           'Walkout Basement',
-#           'Constructed On Original Foundation',
-#           'Modified For Disabled',
-#           'Old House On New Foundation',
-#           'Basementless',
-#           'Penthouse',
-#           'Market Adjustment'
-#        text = text == 'Yes' ? 'T' : 'F'
       when 'Market Adjustment'
         text = text == 'Yes' ? 'T' : 'F'
       end

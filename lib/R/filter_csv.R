@@ -4,10 +4,8 @@ unknownImpact <- c('Taxation.Status', 'Assessment.Class',
                    'Property.Type', 'Property.Use', 'Valuation.Approach',
                    'Market.Adjustment', 'Community', 'Market.Area', 'Sub.Neighbourhood.Code..SNC.',
                    'Sub.Market.Area', 'Influences', 'Land.Use.Designation', 'Building.Count',
-                   'Building.Type.Structure', 'Year.of.Construction', 'Quality', 'Basement.Suite',
-                   'Walkout.Basement', 'Garage.Type', 'Fireplace.Count',
-                   'Constructed.On.Original.Foundation', 'Modified.For.Disabled',
-                   'Old.House.On.New.Foundation', 'Basementless', 'Penthouse')
+                   'Building.Type.Structure', 'Year.of.Construction', 'Quality',
+                   'Garage.Type', 'Features')
 
 
 # These factors don't directly affect the assessment
