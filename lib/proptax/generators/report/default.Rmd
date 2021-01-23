@@ -221,10 +221,10 @@ adjustedValues <- predict(reg)
 adjustedProperties <- data.frame(houseNumbers, adjustedValues, assessedDifferences)
 ```
 
-```{r generatePlot, fig.cap=paste(myHouseNumber, "Overassessment", " "), fig.width=12, echo=FALSE}
+```{r generatePlot, fig.cap=paste(myHouseNumber, "Overassessment", " "), fig.width=12, echo=FALSE, warning=FALSE, message=FALSE}
 plot.title <- paste(min(houseNumbers), "-", max(houseNumbers), myStreetName, sep=" ")
 plot.subtitle = 'Current Assessed Property Values'
-ggplot(data, aes(x=areaTotals, y=assessedValues)) +
+plot <- ggplot(data, aes(x=areaTotals, y=assessedValues)) +
     # Plot title
     ggtitle(bquote(atop(bold(.(plot.title)), atop(italic(.(plot.subtitle)), "")))) +
     theme(plot.title=element_text(size=24, hjust = 0.5)) +
@@ -254,7 +254,9 @@ ggplot(data, aes(x=areaTotals, y=assessedValues)) +
               hjust=0.5, vjust=-1.2) +
 
     # Best fit line
-    geom_smooth(method=lm) #+
+    geom_smooth(method=lm)
+
+print(plot)
 ```
 
 # Conclusion
