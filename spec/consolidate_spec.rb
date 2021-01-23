@@ -10,17 +10,20 @@ describe Proptax::Consolidator do
     end
 
     before(:each) do
+      # For future reference, this is stubbing the `pdftotext` call.
+      # As a consequence, `expected_imperial.csv` has two identical records.
+      # Cf. `writes CSV data to stdout` test
       allow(subject).to receive(:`).and_return(@data)
     end
- 
+
     context 'program is executed with directory name argument' do
       subject { Proptax::Consolidator }
 
       it 'doesn\'t barf if the directory doesn\'t exist' do
-        expect { subject.process('no_such_dir') }.to output("Directory no_such_dir does not exist\n").to_stdout 
-        expect { subject.process('/no_such_dir') }.to output("Directory /no_such_dir does not exist\n").to_stdout 
-        expect { subject.process('') }.to output("No directory specified\n").to_stdout 
-        expect { subject.process('    ') }.to output("No directory specified\n").to_stdout 
+        expect { subject.process('no_such_dir') }.to output("Directory no_such_dir does not exist\n").to_stdout
+        expect { subject.process('/no_such_dir') }.to output("Directory /no_such_dir does not exist\n").to_stdout
+        expect { subject.process('') }.to output("No directory specified\n").to_stdout
+        expect { subject.process('    ') }.to output("No directory specified\n").to_stdout
       end
 
       it 'calls `pdftotext` for every PDF in the directory' do
@@ -30,7 +33,7 @@ describe Proptax::Consolidator do
       end
 
       it 'writes CSV data to stdout' do
-        expect { subject.process('spec/data') }.to output(@results).to_stdout 
+        expect { subject.process('spec/data') }.to output(@results).to_stdout
       end
     end
   end
@@ -38,11 +41,11 @@ describe Proptax::Consolidator do
   describe '#parse' do
     it 'returns a CSV-ready record' do
       csv = Proptax::Consolidator.parse File.read('spec/data/sample.txt')
-      expected_imperial = ['539000', '000000907', '11339 FAKE ST NW', 'Taxable', 'Residential 100%',
+      expected_imperial = ['465000', '438098303', '11363 ROCKYVALLEY DR NW', 'Taxable', 'Residential 100%',
                            'Land and Improvement', 'Single Residential', 'Sales Comparison', 'F',
-                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A', 
-                           'Traffic Collector', 'Residential - Contextual One Dwelling', '4929', '1',
-                           'House / 2 Storey', '2002', 'Average', '1911', '680', '608', '1']
+                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A',
+                           'Traffic Collector', 'Residential - Contextual One Dwelling', '4860', '1',
+                           'House / 2 Storey', '2002', 'Average', '1859', '488', 'Attached', '383', 'Fireplace (1)']
 
       expect(csv.length).to eq(expected_imperial.length)
       expect(csv.length).to eq(Proptax::Consolidator::Headers.length)
@@ -53,11 +56,31 @@ describe Proptax::Consolidator do
 
     it 'returns a CSV-ready record with Below Grade value set to 0, if Below Grade not present' do
       csv = Proptax::Consolidator.parse File.read('spec/data/sample_no_below_grade.txt')
-      expected_imperial = ['477000', '000000608', '11311 FAKE ST NW', 'Taxable', 'Residential 100%',
+      expected_imperial = ['458500', '438099608', '11311 ROCKYVALLEY DR NW', 'Taxable', 'Residential 100%',
                            'Land and Improvement', 'Single Residential', 'Sales Comparison', 'F',
-                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A', 
+                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A',
                            'Traffic Collector', 'Residential - Contextual One Dwelling', '4176', '1',
-                           'House / 2 Storey', '2002', 'Average', '1831', '0', '396', '1']
+                           'House / 2 Storey', '2002', 'Average', '1831', '0', 'Attached', '396',
+                           'Walk Out Basement/Fireplace (1)']
+
+      expect(csv.length).to eq(expected_imperial.length)
+      expect(csv.length).to eq(Proptax::Consolidator::Headers.length)
+      expected_imperial.each_with_index do |val, index|
+        expect(csv[index]).to eq(val)
+      end
+    end
+
+    #
+    # This is also reflected in the test above (i.e., No Below Grade). Same data, same house
+    #
+    it 'returns slash-seperated values for multiple features' do
+      csv = Proptax::Consolidator.parse File.read('spec/data/sample_multi_features.txt')
+      expected_imperial = ['506500', '438099707', '11307 ROCKYVALLEY DR NW', 'Taxable', 'Residential 100%',
+                           'Land and Improvement', 'Single Residential', 'Sales Comparison', 'F',
+                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A',
+                           'Traffic Collector', 'Residential - Contextual One Dwelling', '4854', '1',
+                           'House / 2 Storey', '2000', 'Average', '1960', '750', 'Attached', '427',
+                           'Walk Out Basement/Fireplace (1)']
 
       expect(csv.length).to eq(expected_imperial.length)
       expect(csv.length).to eq(Proptax::Consolidator::Headers.length)
@@ -85,12 +108,12 @@ describe Proptax::Consolidator do
 
     it 'returns slash-seperated values for multiple influencing factors' do
       csv = Proptax::Consolidator.parse File.read('spec/data/sample_multi_influences.txt')
-      expected_imperial = ['510000', '000000806', '11303 FAKE ST NW', 'Taxable', 'Residential 100%',
+      expected_imperial = ['485500', '438099806', '11303 ROCKYVALLEY DR NW', 'Taxable', 'Residential 100%',
                            'Land and Improvement', 'Single Residential', 'Sales Comparison', 'F',
-                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A', 
-                           'Traffic Collector/Green Space - Athletic Field Road/Corner Lot', 
+                           'Rocky Ridge', 'SNGLRES NORTH', '001', 'SNGLRES A',
+                           'Corner Lot/Traffic Collector/Green Space - Athletic Field Road',
                            'Residential - Contextual One Dwelling', '5368', '1', 'House / 2 Storey',
-                           '2000', 'Average', '1940', '602', '420', '1']
+                           '2000', 'Average', '1940', '602', 'Attached', '420', 'Fireplace (1)']
 
       expect(csv.length).to eq(expected_imperial.length)
       expect(csv.length).to eq(Proptax::Consolidator::Headers.length)
@@ -126,9 +149,9 @@ describe Proptax::Consolidator do
     end
 
     it 'leaves only square footage from Garage Area' do
-      expect(Proptax::Consolidator.clean('420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[22])).to eq('420')
-      expect(Proptax::Consolidator.clean('1,420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[22])).to eq('1420')
-      expect(Proptax::Consolidator.clean('2,555,420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[22])).to eq('2555420')
+      expect(Proptax::Consolidator.clean('420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[23])).to eq('420')
+      expect(Proptax::Consolidator.clean('1,420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[23])).to eq('1420')
+      expect(Proptax::Consolidator.clean('2,555,420 sq. ft. / 39 sq. m.', Proptax::Consolidator::Headers[23])).to eq('2555420')
     end
   end
 end

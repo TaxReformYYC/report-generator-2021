@@ -8,7 +8,7 @@ describe Proptax::CLI, :type => :aruba do
 
   describe 'consolidator' do
     it "doesn't barf if directory provided doesn't exist" do
-      run_simple "proptax consolidate fake_dir"
+      run_command_and_stop "proptax consolidate fake_dir"
       expect(last_command_started).to be_successfully_executed
       expect(last_command_started).to have_output /Directory fake_dir does not exist/
     end 
@@ -18,7 +18,7 @@ describe Proptax::CLI, :type => :aruba do
       # `#read` leaves a `\n`, while `aruba` does not
       expected = File.read('spec/aruba_data/expected_consolidated.csv').strip
     
-      run_simple "proptax consolidate aruba_data"
+      run_command_and_stop "proptax consolidate aruba_data"
       expect(last_command_started).to be_successfully_executed
       expect(last_command_started).to have_output expected
     end
